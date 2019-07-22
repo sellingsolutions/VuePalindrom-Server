@@ -10,7 +10,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VuePalindrom_Server</RootNamespace>
-    <AssemblyName>VuePalindrom-Server</AssemblyName>
+    <AssemblyName>VuePalindromServer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -44,28 +44,19 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.2.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
     <Reference Include="Starcounter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d2df1e81d0ca3abf" />
     <Reference Include="Starcounter.Internal, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d2df1e81d0ca3abf" />
     <Reference Include="Starcounter.Hosting, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d2df1e81d0ca3abf" />
-    <Reference Include="Starcounter.Linq, Version=2.4.1.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Starcounter.Linq.2.4.1\lib\net461\Starcounter.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="Starcounter.Startup, Version=0.9.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Starcounter.Startup.0.9.0\lib\net462\Starcounter.Startup.dll</HintPath>
-    </Reference>
+    <Reference Include="Starcounter.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d2df1e81d0ca3abf, processorArchitecture=MSIL" />
     <Reference Include="Starcounter.XSON, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d2df1e81d0ca3abf" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Startup.cs" />
+    <Compile Include="PalindromRestHandler.cs" />
     <Compile Include="UserViewModel.json.cs">
       <DependentUpon>UserViewModel.json</DependentUpon>
     </Compile>
@@ -76,7 +67,11 @@
     </TypedJSON>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <PackageReference Include="Starcounter.Linq">
+      <Version>2.4.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

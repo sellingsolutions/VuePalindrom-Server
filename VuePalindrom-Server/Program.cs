@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Starcounter;
-using Starcounter.Startup;
+using Starcounter.XSON.Advanced;
 
 namespace VuePalindrom_Server
 {
@@ -15,22 +16,19 @@ namespace VuePalindrom_Server
          */
         static void Main()
         {
-            DefaultStarcounterBootstrapper.Start(new Startup());
+            PalindromRestHandler.RegisterJsonPatchHandlers();
 
-            Handle.GET("/VuePalindrom-Server/", (Request request) =>
+            Handle.GET("/VuePalindromServer/NewConnection", (Request request) =>
             {
+                PalindromRestHandler.SetDefaultCorsReponseHeaders(request);
 
-                var session = Session.Ensure();
+                Session session = Session.Ensure();
+                string url = $"http://localhost:8080/vue-palindrom/{session.SessionId}";
 
-                var resp = new Response()
-                {
-                    //StatusCode = 200,
-                    //ContentType = "text/html",
-                    // X-Location = "...ws server?.."
-                    //Body = session.SessionId
-                };
+                session.SetClientRoot(new UserViewModel());
+                Handle.AddOutgoingHeader("X-Location", url);
 
-                return resp;
+                return url;
             });
         }
     }
